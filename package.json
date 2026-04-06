@@ -1,0 +1,26 @@
+{
+  "name": "vite_press",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "fmt": "oxfmt",
+    "dev": "vitepress dev",
+    "build": "vitepress build",
+    "preview": "vitepress preview",
+    "prepare": "husky"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "husky": "^9.1.7",
+    "lint-staged": "^16.4.0",
+    "oxfmt": "^0.43.0",
+    "vitepress": "^2.0.0-alpha.16"
+  },
+  "lint-staged": {
+    "*": "oxfmt"
+  }
+}
