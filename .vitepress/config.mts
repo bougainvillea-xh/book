@@ -1,7 +1,13 @@
 import { defineConfig } from 'vitepress'
 
+const base =
+  process.env.GITHUB_ACTIONS === 'true' && process.env.GITHUB_REPOSITORY
+    ? `/${process.env.GITHUB_REPOSITORY.split('/')[1]}/`
+    : '/'
+
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
+  base,
   title: '开发者文档',
   description: 'Windows 与 Linux 开发环境搭建指南',
   lastUpdated: true,
