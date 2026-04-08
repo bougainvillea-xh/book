@@ -1,0 +1,12 @@
+node_modules
+.github
+.vitepress/cache
+.vitepress/dist
+.vitepress/temp
+*.log
+.env
+.env.*
+.DS_Store
+Thumbs.db
+.idea
+.vscode
