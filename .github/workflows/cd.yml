@@ -58,19 +58,15 @@ jobs:
           tags: |
             ${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME }}:latest
 
-  scp_ping:
-    needs: build
+  deploy:
+    needs: docker_push
     runs-on: ubuntu-latest
     steps:
-      - name: Create SCP probe file
-        run: echo "scp probe ${{ github.sha }} $(date -u +%Y-%m-%dT%H:%M:%SZ)" > scp-ping.txt
-
-      - name: SCP test (password)
-        uses: appleboy/scp-action@v0.1.7
+      - name: Run deploy script on server
+        uses: appleboy/ssh-action@v1
         with:
           host: ${{ secrets.SERVER_HOST }}
           username: ${{ secrets.SERVER_USERNAME }}
           password: ${{ secrets.SERVER_PASSWORD }}
           port: ${{ secrets.SERVER_PORT }}
-          source: scp-ping.txt
-          target: /opt/www/book/
+          script: bash /opt/www/book/deploy.sh
