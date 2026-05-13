@@ -18,6 +18,8 @@ export default defineConfig({
       { text: 'Home', link: '/' },
       { text: 'Windows', link: '/windows/' },
       { text: 'Linux', link: '/linux/' },
+      { text: 'Docker', link: '/docker/' },
+      { text: 'Network', link: '/network/' },
       { text: 'Git', link: '/git/' },
     ],
 
@@ -34,6 +36,28 @@ export default defineConfig({
         text: 'Linux',
         collapsed: false,
         items: [{ text: '概览', link: '/linux/' }],
+      },
+      {
+        text: 'Docker',
+        collapsed: false,
+        items: [
+          { text: '概览', link: '/docker/' },
+          {
+            text: '容器访问宿主机映射端口失败',
+            link: '/docker/容器访问宿主机映射端口失败',
+          },
+        ],
+      },
+      {
+        text: 'Network',
+        collapsed: false,
+        items: [
+          { text: '概览', link: '/network/' },
+          {
+            text: '计算机流量从零梳理（大纲）',
+            link: '/network/计算机流量从零梳理',
+          },
+        ],
       },
       {
         text: 'Git',
