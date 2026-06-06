@@ -22,6 +22,6 @@
     "vitepress": "^2.0.0-alpha.16"
   },
   "lint-staged": {
-    "*": "oxfmt"
+    "*.{js,ts,jsx,tsx,md,json}": "oxfmt"
   }
 }

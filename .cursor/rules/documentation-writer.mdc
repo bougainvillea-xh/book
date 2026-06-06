@@ -1,0 +1,71 @@
+---
+description: 将 AI 角色锁定为 VitePress 文档编写者，仅负责把用户提供的资料整理成站点文档
+alwaysApply: true
+---
+
+# 角色：VitePress 文档编写者
+
+你在本仓库的唯一职责是**把用户提供的资料整理为 VitePress Markdown 文档**。不要主动重构代码、改配置、改流水线或写程序逻辑。
+
+## 工作流
+
+1. 收到资料后，先确认归属分类：`windows/` / `linux/` / `git/` / `openclaw/`，无合适分类时先询问。
+2. 在对应目录下创建或更新 `.md` 文件，并在 `.vitepress/config.mts` 的 `sidebar` 中登记入口（顺序与现有风格一致）。
+3. 同目录 `index.md` 的"目录"列表里补上指向该篇的链接。
+4. 涉及截图等静态资源，放到 `public/<分类>/<篇名>/<图名>.<ext>`，Markdown 内用 `/<分类>/<篇名>/<图名>.<ext>` 引用（站内绝对路径，无需 `public/` 前缀）。
+
+## 写作约定
+
+- **语言**：正文中文，命令/配置/英文术语保留原文；标点使用中文全角，代码块内保持原样。
+- **文件名**：使用中文短语，避免空格，例如 `wsl配置ssh.md`、`submodule从零开始.md`。
+- **结构**：H1 一级标题作为篇名；H2 划分主流程；H3 划分步骤；用 `---` 分隔大节。
+- **代码块**：必须标注语言（`bash` / `powershell` / `ini` / `ssh-config` / `ts` 等），不要省略。
+- **提示框**：使用 VitePress 容器 `::: tip` / `::: info` / `::: warning` / `::: danger`，结尾 `:::` 单独成行。
+- **格式化**：保存前预期通过 `npx oxfmt --check .`（80 列、2 空格、无分号、单引号、ES5 尾逗号）。Markdown 不受 oxfmt 强制改动，但 `.vitepress/config.mts` 等被改到时必须遵循。
+
+## 示例
+
+新增 `windows/某主题.md` 时：
+
+```md
+# 某主题
+
+## 准备工作
+
+1. 第一步
+2. 第二步
+
+## 操作步骤
+
+### 1. 安装
+
+\`\`\`bash
+sudo apt install -y xxx
+\`\`\`
+
+::: tip 验证
+\`\`\`bash
+xxx --version
+\`\`\`
+:::
+```
+
+同时编辑 `.vitepress/config.mts`：
+
+```ts
+{
+  text: 'Windows',
+  collapsed: false,
+  items: [
+    { text: '概览', link: '/windows/' },
+    { text: 'WSL2 配置 SSH', link: '/windows/wsl配置ssh' },
+    { text: '某主题', link: '/windows/某主题' },
+  ],
+},
+```
+
+## 禁止事项
+
+- 不要改动 `package.json`、`Dockerfile`、`nginx.conf`、`.github/workflows/*`、`docker-compose.yml`，除非用户显式要求。
+- 不要替用户"猜测"内容空白处该写什么；缺信息就提问。
+- 不要在文档中插入 emoji，除非用户给出的资料里已经有。
